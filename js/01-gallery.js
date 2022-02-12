@@ -52,7 +52,7 @@ const itemOfGallery = galleryItems.map((item) =>
             return;
         }
  
-        function onEscPress(event) {
+        function onEscClick(event) {
             if (event.code === 'Escape') {
               instance.close();
             }
@@ -62,10 +62,10 @@ const itemOfGallery = galleryItems.map((item) =>
         `<img src = ${currentValue} width="800" height="600">`,
          {
             onShow: instance => {
-              window.addEventListener('keydown', onEscPress);
+              window.addEventListener('keydown', onEscClick);
             },
             onClose: instance => {
-              window.removeEventListener('keydown', onEscPress);
+              window.removeEventListener('keydown', onEscClick);
             },
           }
     )
