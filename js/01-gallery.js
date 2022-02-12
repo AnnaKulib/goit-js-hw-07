@@ -17,55 +17,57 @@ const itemOfGallery = galleryItems.map((item) =>
         </a>
     </div>`)
   .join(' ');
-
+ 
   listGalley.insertAdjacentHTML('afterbegin', itemOfGallery);
 
   listGalley.addEventListener('click', onListGalleryClick);
 
-function onListGalleryClick(event) {
-    event.preventDefault();
+  let instance;
 
-    const currentEl = event.target;
-    const currentValue = currentEl.dataset.source;
+// function onListGalleryClick(event) {
+//     event.preventDefault();
 
-    if (!currentValue) {
-        return;
-    }
-    const instance = basicLightbox.create(
-        `<img src = ${currentValue} width="800" height="600">`
-    )
-        instance.show()
-    }
+//     const currentEl = event.target;
+//     const currentValue = currentEl.dataset.source;
+
+//     if (!currentValue) {
+//         return;
+//     }
+//     let instance = basicLightbox.create(
+//         `<img src = ${currentValue} width="800" height="600">`
+//     )
+//         instance.show()
+//     }
 
     // -----------------------------------------------------------
     // Вариант функции с добавление условий (закрытие по Esc)
 
-    // function onListGalleryClick(event) {
-    //     event.preventDefault();
+    function onListGalleryClick(event) {
+        event.preventDefault();
     
-    //     const currentEl = event.target;
-    //     const currentValue = currentEl.dataset.source;
+        const currentEl = event.target;
+        const currentValue = currentEl.dataset.source;
     
-    //     if (!currentValue) {
-    //         return;
-    //     }
+        if (!currentValue) {
+            return;
+        }
  
-    //     function onEscPress(event) {
-    //         if (event.code === 'Escape') {
-    //           instance.close();
-    //         }
-    //       }
+        function onEscPress(event) {
+            if (event.code === 'Escape') {
+              instance.close();
+            }
+          }
     
-    //     const instance = basicLightbox.create(
-    //     `<img src = ${currentValue} width="800" height="600">`,
-    //      {
-    //         onShow: instance => {
-    //           window.addEventListener('keydown', onEscPress);
-    //         },
-    //         onClose: instance => {
-    //           window.removeEventListener('keydown', onEscPress);
-    //         },
-    //       }
-    // )
-    //     instance.show()
-    // }
+        let instance = basicLightbox.create(
+        `<img src = ${currentValue} width="800" height="600">`,
+         {
+            onShow: instance => {
+              window.addEventListener('keydown', onEscPress);
+            },
+            onClose: instance => {
+              window.removeEventListener('keydown', onEscPress);
+            },
+          }
+    )
+        instance.show()
+    }
